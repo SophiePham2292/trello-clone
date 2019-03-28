@@ -5,7 +5,7 @@ const item = props => {
     const { title } = props;
 
     return (
-        <$Li>{title}</$Li>
+        <$Li draggable>{title}</$Li>
     )
 }
 

@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
 import ToDoCard from "./components/ToDoCard"
 import styled from "styled-components";
+import cardData from "./data/cardData"
 
 class App extends Component {
+  state = {
+    cardData: null
+  }
+  componentDidMount() {
+    if (!this.state.cardData) {
+      this.setState({
+        cardData: cardData
+      })
+    }
+  }
   render() {
+    const { cardData } = this.state;
+    if (!cardData) return null;
+
+    let cardDisplayItems = [];
+    for (let cardKey in cardData) {
+      cardDisplayItems.push(<ToDoCard
+        key={cardKey}
+        title={cardKey}
+        toDoItems={cardData[cardKey]}
+      />)
+    }
+
     return (
       <$Wrapper >
-        <ToDoCard title="To Do"></ToDoCard>
-        <ToDoCard title="Done"></ToDoCard>
+        {cardDisplayItems}
       </$Wrapper>
     );
   }
